@@ -2,6 +2,7 @@
 
 namespace Bolt\Extension\Koolserve\Cloudflare;
 
+use Bolt\Asset\Widget\Widget;
 use Bolt\Extension\SimpleExtension;
 
 /**
@@ -11,5 +12,27 @@ use Bolt\Extension\SimpleExtension;
  */
 class CloudflareExtension extends SimpleExtension
 {
+    protected function registerAssets()
+    {
+        $widgetObj = new Widget();
+        $widgetObj
+            ->setZone('backend')
+            ->setLocation('dashboard_aside_middle')
+            ->setCallback([$this, 'backendDashboardWidget'])
+            ->setCallbackArguments([])
+            ->setDefer(false);
+        
+        $assets[] = $widgetObj;
 
+        return $assets;
+    }
+
+    public function backendDashboardWidget()
+    {
+        return $this->renderTemplate('widget.twig', [
+            'day' => 20,
+            'week' => 40,
+            'month' => 60,
+        ]);
+    }
 }
