@@ -4,6 +4,7 @@ namespace Bolt\Extension\Koolserve\Cloudflare;
 
 use Bolt\Asset\Widget\Widget;
 use Bolt\Extension\SimpleExtension;
+use Cloudflare;
 
 /**
  * Cloudflare extension class.
@@ -12,6 +13,16 @@ use Bolt\Extension\SimpleExtension;
  */
 class CloudflareExtension extends SimpleExtension
 {
+    protected $cloudflare;
+
+    protected function newCloudflare() {
+        $config = $this->getConfig();
+        return new Cloudflare\Cloudflare(
+            $config['APIKey'],
+            $config['Email']
+        );
+    }
+
     protected function registerAssets()
     {
         $widgetObj = new Widget();
@@ -21,18 +32,44 @@ class CloudflareExtension extends SimpleExtension
             ->setCallback([$this, 'backendDashboardWidget'])
             ->setCallbackArguments([])
             ->setDefer(false);
-        
+
         $assets[] = $widgetObj;
 
         return $assets;
     }
 
+    protected function fetchData()
+    {
+        $config = $this->getConfig();
+
+
+        $times = [
+            'day' => '-1440',
+            'week' => '-10080',
+            'month' => '-43200',
+        ];
+
+        $data = [];
+        foreach ($times as $time => $value) {
+            $ZoneAnalytics = new Cloudflare\ZoneAnalytics($this->newCloudflare());
+            $ZA = $ZoneAnalytics->fetchDashboard(
+                $config['ZoneID'],
+                ['since' => $value]
+            );
+
+            if($ZA != false) {
+                $total = $ZA->getTotalRequests();
+
+                $data[$time] = $total->all;
+            }
+        }
+
+        return $data;
+    }
+
     public function backendDashboardWidget()
     {
-        return $this->renderTemplate('widget.twig', [
-            'day' => 20,
-            'week' => 40,
-            'month' => 60,
-        ]);
+        $data = $this->fetchData();
+        return $this->renderTemplate('widget.twig', $data);
     }
 }
