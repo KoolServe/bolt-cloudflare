@@ -23,7 +23,7 @@
     "autoload": {
         "psr-4": {
             "Bolt\\Extension\\Koolserve\\Cloudflare\\": "src",
-            "Cloudflare\\": "lib/alpharecon19/cloudflare-php/src/",
+            "Cloudflare\\": "lib/alpharecon19/cloudflare-php/src/"
         }
     },
     "autoload-dev": {
