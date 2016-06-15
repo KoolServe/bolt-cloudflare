@@ -13,12 +13,6 @@ use Cloudflare;
  */
 class CloudflareExtension extends SimpleExtension
 {
-    public function initialize()
-    {
-       var_dump($this->app, 'Uno');
-       exit();
-    }
-
     protected function newCloudflare() {
         $config = $this->getConfig();
         $app = $this->getContainer();
