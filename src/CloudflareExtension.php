@@ -13,14 +13,17 @@ use Cloudflare;
  */
 class CloudflareExtension extends SimpleExtension
 {
-    protected $cloudflare;
+    public function initialize()
+    {
+       var_dump($this->app, 'Uno');
+       exit();
+    }
 
     protected function newCloudflare() {
         $config = $this->getConfig();
-        return new Cloudflare\Cloudflare(
-            $config['APIKey'],
-            $config['Email']
-        );
+        $app = $this->getContainer();
+
+        return new Cloudflare\Cloudflare($config, $app['guzzle.client']);
     }
 
     protected function registerAssets()
@@ -42,7 +45,6 @@ class CloudflareExtension extends SimpleExtension
     {
         $config = $this->getConfig();
 
-
         $times = [
             'day' => '-1440',
             'week' => '-10080',
@@ -59,7 +61,6 @@ class CloudflareExtension extends SimpleExtension
 
             if($ZA != false) {
                 $total = $ZA->getTotalRequests();
-
                 $data[$time] = $total->all;
             }
         }
