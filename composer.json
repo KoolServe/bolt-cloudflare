@@ -1,8 +1,9 @@
 {
     "name": "koolserve/cloudflare",
-    "description": "",
+    "description": "A bolt extension to show analytics from Cloudflare about your website.",
     "type": "bolt-extension",
     "keywords": [
+        "Cloudflare"
     ],
     "require": {
         "bolt/bolt": "^3.0"
@@ -10,7 +11,7 @@
     "require-dev": {
         "phpunit/phpunit": "^4.7"
     },
-    "license": "GNU",
+    "license": "GPL-3.0",
     "authors": [
         {
             "name": "Chris Hilsdon",

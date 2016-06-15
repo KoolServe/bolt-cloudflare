@@ -1,7 +1,8 @@
-Cloudflare
-======================
+bolt-cloudflare
+===============
 
-This [bolt.cm](https://bolt.cm/) extension ...
+A [Bolt](https://bolt.cm) extension to show analytics from [Cloudflare](https://cloudflare.com) about your
+website. Kick started with the [guenther](https://getguenther.com) command line tool.
 
 ### Installation
 1. Login to your Bolt installation
@@ -12,10 +13,19 @@ This [bolt.cm](https://bolt.cm/) extension ...
 6. Click on "Install This Version" on the latest stable version
 
 ### Configuration
-...
+```
+# This is your API Key from Cloudflare
+APIKey: ''
+
+# Email address for the account with the domain
+Email: ''
+
+# Zone ID for the domain
+ZoneID: ''
+```
 
 ---
 
 ### License
 
-This Bolt extension is open-sourced software licensed under the [Your preferred License]
+This Bolt extension is open-sourced software licensed under the GPL-3.0

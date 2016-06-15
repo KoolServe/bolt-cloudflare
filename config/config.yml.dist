@@ -1,3 +1,8 @@
+# This is your API Key from Cloudflare
 APIKey: ''
+
+# Email address for the account with the domain
 Email: ''
+
+# Zone ID for the domain
 ZoneID: ''
