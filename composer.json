@@ -34,6 +34,7 @@
     },
     "extra": {
         "bolt-assets": "web",
-        "bolt-class": "Bolt\\Extension\\Koolserve\\Cloudflare\\CloudflareExtension"
+        "bolt-class": "Bolt\\Extension\\Koolserve\\Cloudflare\\CloudflareExtension",
+        "bolt-icon": "icon.png"
     }
 }
