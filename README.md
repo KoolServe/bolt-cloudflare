@@ -1,7 +1,7 @@
 bolt-cloudflare
 ===============
 
-A [Bolt](https://bolt.cm) extension to show analytics from [Cloudflare](https://cloudflare.com) about your
+[This](https://extensions.bolt.cm/view/46b42fb7-3291-11e6-bf25-14cdca8e654f) [Bolt](https://bolt.cm) extension to show analytics from [Cloudflare](https://cloudflare.com) about your
 website. Kick started with the [guenther](https://getguenther.com) command line tool.
 
 ### Installation
