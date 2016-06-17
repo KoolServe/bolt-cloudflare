@@ -23,7 +23,7 @@ class CloudflareExtension extends SimpleExtension
      * The even name used in the log
      * @var string
      */
-    private $event = 'Cloudflare';
+    private $event = 'extension';
 
     /**
      * Create a new instance of Cloudflare\Cloudflare and use the guzzle client
