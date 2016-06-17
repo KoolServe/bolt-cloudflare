@@ -9,7 +9,7 @@ use Cloudflare;
 /**
  * Cloudflare extension class.
  *
- * @author Chris Hilsdon <chris@koolserve.uk
+ * @author Chris Hilsdon <chris@koolserve.uk>
  */
 class CloudflareExtension extends SimpleExtension
 {

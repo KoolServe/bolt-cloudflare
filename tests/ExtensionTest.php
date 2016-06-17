@@ -8,7 +8,7 @@ use Bolt\Extension\Koolserve\Cloudflare\CloudflareExtension;
 /**
  * Cloudflare testing class.
  *
- * @author Chris Hilsdon <chris@koolserve.uk
+ * @author Chris Hilsdon <chris@koolserve.uk>
  */
 class ExtensionTest extends BoltUnitTest
 {
