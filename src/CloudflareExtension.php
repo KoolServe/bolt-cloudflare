@@ -13,9 +13,23 @@ use Cloudflare;
  */
 class CloudflareExtension extends SimpleExtension
 {
+    /**
+     * Name of the key used for caching the dashbord widget data
+     * @var string
+     */
     private $cacheKey = 'cloudflaredashboarddata';
+
+    /**
+     * The even name used in the log
+     * @var string
+     */
     private $event = 'Cloudflare';
 
+    /**
+     * Create a new instance of Cloudflare\Cloudflare and use the guzzle client
+     * that is built into bolt
+     * @return New instance of Cloudflare\Cloudflare
+     */
     protected function newCloudflare() {
         $config = $this->getConfig();
         $app = $this->getContainer();
@@ -25,6 +39,8 @@ class CloudflareExtension extends SimpleExtension
 
     protected function registerAssets()
     {
+        //Create a new dashbord widget. Use dashboard_aside_bottom to aviod
+        //conflicting with bobdenotter/seo.
         $widgetObj = new Widget();
         $widgetObj
             ->setZone('backend')
@@ -38,6 +54,11 @@ class CloudflareExtension extends SimpleExtension
         return $assets;
     }
 
+    /**
+     * Fetch the data from cloudflare needed for the dashbord widget. Will also
+     * cache the response if it was successfull.
+     * @return array Website hits for the last day, week and month
+     */
     protected function fetchData()
     {
         $config = $this->getConfig();
@@ -76,7 +97,7 @@ class CloudflareExtension extends SimpleExtension
             }
         }
 
-        //Store it iin the cache for the next hour
+        //Store it in the cache for the next hour
         $cache->save($this->cacheKey, $data, 3600);
         $app['logger.system']->info(
             'Saved the new data from clodflare for the next hour',
@@ -86,6 +107,9 @@ class CloudflareExtension extends SimpleExtension
         return $data;
     }
 
+    /**
+     * Render the backend dashboard widget
+     */
     public function backendDashboardWidget()
     {
         $data = $this->fetchData();
