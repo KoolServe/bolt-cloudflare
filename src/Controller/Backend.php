@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Backend implements ControllerProviderInterface
 {
+    protected $app;
+
     /**
      * {@inheritdoc}
      */
@@ -19,23 +21,22 @@ class Backend implements ControllerProviderInterface
         $this->app = $app;
 
         /** @var $ctr ControllerCollection */
-       $ctr = $app['controllers_factory'];
-       $ctr->value(Zone::KEY, Zone::BACKEND);
+        $ctr = $app['controllers_factory'];
+        $ctr->value(Zone::KEY, Zone::BACKEND);
 
-       $baseUrl = '/extend/cloudflare';
-       $ctr->match($baseUrl, [$this, 'index'])
-           ->bind('cloudflare')
-           ->method(Request::METHOD_GET)
-       ;
+        $baseUrl = '/extend/cloudflare';
+        $ctr->match($baseUrl, [$this, 'index'])
+            ->bind('cloudflare')
+            ->method(Request::METHOD_GET)
+        ;
 
        return $ctr;
     }
 
     /**
      * @param Application $app
-     * @param Request     $request
      */
-    public function index(Application $app, Request $request)
+    public function index(Application $app)
     {
         $html = $app['twig']->render('@CloudflareBackend/index.twig', []);
         return new Response(new \Twig_Markup($html, 'UTF-8'));
