@@ -1,6 +1,8 @@
 bolt-cloudflare
 ===============
-![](https://circleci.com/gh/KoolServe/bolt-cloudflare.png?style=shield&circle-token=d76513d04bea285e7f6b253c2ea6342a1618cd5f)
+[![circleci](https://circleci.com/gh/KoolServe/bolt-cloudflare.png?style=shield&circle-token=d76513d04bea285e7f6b253c2ea6342a1618cd5f)](https://circleci.com/gh/KoolServe/bolt-cloudflare)
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KoolServe/bolt-cloudflare/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/KoolServe/bolt-cloudflare/?branch=master)
 
 
 [This](https://extensions.bolt.cm/view/46b42fb7-3291-11e6-bf25-14cdca8e654f) [Bolt](https://bolt.cm) extension to show analytics from [Cloudflare](https://cloudflare.com) about your
