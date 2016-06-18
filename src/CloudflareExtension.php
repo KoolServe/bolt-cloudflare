@@ -28,7 +28,7 @@ class CloudflareExtension extends SimpleExtension
     /**
      * Create a new instance of Cloudflare\Cloudflare and use the guzzle client
      * that is built into bolt
-     * @return New instance of Cloudflare\Cloudflare
+     * @return Cloudflare\Cloudflare instance of Cloudflare\Cloudflare
      */
     protected function newCloudflare() {
         $config = $this->getConfig();
@@ -67,7 +67,7 @@ class CloudflareExtension extends SimpleExtension
         $data = $cache->fetch($this->cacheKey);
 
         //Check to see if we have a cached version
-        if($data) {
+        if ($data) {
             //We do so use it
             return $data;
         }
@@ -91,7 +91,7 @@ class CloudflareExtension extends SimpleExtension
                 ['since' => $value]
             );
 
-            if($ZA != false) {
+            if ($ZA != false) {
                 $total = $ZA->getTotalRequests();
                 $data[$time] = $total->all;
             }

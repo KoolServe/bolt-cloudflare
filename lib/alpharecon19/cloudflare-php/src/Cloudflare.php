@@ -43,7 +43,7 @@ class Cloudflare
     public function getGuzzle()
     {
         //If Guzzle has not been setup yet
-        if($this->Guzzle === null) {
+        if ($this->Guzzle === null) {
             var_dump('Guzzle was created');
             $Guzzle = new Client();
             $this->setGuzzle($Guzzle);
@@ -80,7 +80,7 @@ class Cloudflare
     private function loadConfig()
     {
         $config = 'Cloudflare.yml';
-        $configDist = $config.'.dist';
+        $configDist = $config . '.dist';
         $dir = $_SERVER['DOCUMENT_ROOT'];
 
         if (@file_exists($dir . $config)) {
@@ -88,7 +88,7 @@ class Cloudflare
         } elseif (@file_exists($dir . $configDist)) {
             $load = $configDist;
         } else {
-            die('Unable to load either "'.$config.'" or "'.$configDist.'"');
+            die('Unable to load either "' . $config . '" or "' . $configDist . '"');
         }
 
         $config = Yaml::parse(file_get_contents($load));

@@ -35,7 +35,7 @@ class ZoneAnalytics extends Base
         //Remove the last '&'
         $string = substr($string, 0, -1);
 
-        try{
+        try {
             $this->makeRequest($this->URL . '/' . $zone . '/analytics/dashboard/' . $string);
         } catch (ClientException $e) {
             return false;
