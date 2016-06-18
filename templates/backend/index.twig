@@ -1,0 +1,24 @@
+{% extends "_base/_page-nav.twig" %}
+
+{% block page_nav 'Extensions' %}
+
+{% block page_title %}
+{{ __('Cloudflare') }}
+{% endblock page_title %}
+
+{% block page_subtitle %}
+Analytics
+{% endblock page_subtitle %}
+
+{# clear default messages, because we use them in a different spot, in this template #}
+{% block messages "" %}
+
+{% block page_main %}
+
+    <div class="row cloudflare-koolserve-container">
+        <div class="col-md-9">
+            <h1>Hello World</h1>
+        </div>
+    </div>
+
+{% endblock page_main %}

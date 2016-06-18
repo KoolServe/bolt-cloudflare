@@ -4,6 +4,7 @@ namespace Bolt\Extension\Koolserve\Cloudflare;
 
 use Bolt\Asset\Widget\Widget;
 use Bolt\Extension\SimpleExtension;
+use Bolt\Menu\MenuEntry;
 use Cloudflare;
 
 /**
@@ -54,9 +55,42 @@ class CloudflareExtension extends SimpleExtension
         return $assets;
     }
 
+    protected function registerMenuEntries()
+    {
+        $menu = new MenuEntry('cloudflare-menu', 'cloudflare');
+        $menu
+            ->setLabel('Cloudflare')
+            ->setIcon('fa:cloud')
+            ->setPermission('settings')
+        ;
+
+        return [
+            $menu,
+        ];
+    }
+
+    protected function registerBackendControllers()
+    {
+        return [
+            '/' => new Controller\Backend(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerTwigPaths()
+    {
+        return [
+            'templates/backend' => ['position' => 'append', 'namespace' => 'CloudflareBackend'],
+        ];
+    }
+
     /**
      * Fetch the data from cloudflare needed for the dashbord widget. Will also
      * cache the response if it was successfull.
+     *
+     * TODO: Move this to its own class
      * @return array Website hits for the last day, week and month
      */
     protected function fetchData()
