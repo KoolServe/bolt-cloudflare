@@ -63,7 +63,7 @@ class Backend implements ControllerProviderInterface
             ];
         }
 
-        $html = $app['twig']->render('@CloudflareBackend/index.twig', ['data' => $data]);
+        $html = $app['twig']->render('@CloudflareBackend/index.twig', $data);
         return new Response(new \Twig_Markup($html, 'UTF-8'));
     }
 }

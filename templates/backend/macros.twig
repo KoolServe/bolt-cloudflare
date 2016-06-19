@@ -1,0 +1,22 @@
+{# @link: http://stackoverflow.com/a/15303004 #}
+{% macro bytesToSize(bytes) %}
+{% spaceless %}
+    {% set kilobyte = 1024 %}
+    {% set megabyte = kilobyte * 1024 %}
+    {% set gigabyte = megabyte * 1024 %}
+    {% set terabyte = gigabyte * 1024 %}
+
+    {% if bytes < kilobyte %}
+        {{ bytes ~ ' B' }}
+    {% elseif bytes < megabyte %}
+        {% set text = (bytes / kilobyte)|number_format(2, '.') ~ ' <small>KB</small>' %}
+    {% elseif bytes < gigabyte %}
+        {% set text = (bytes / megabyte)|number_format(2, '.') ~ ' <small>MB</small>' %}
+    {% elseif bytes < terabyte %}
+        {% set text = (bytes / gigabyte)|number_format(2, '.') ~ ' <small>GB</small>' %}
+    {% else %}
+        {% set text = (bytes / terabyte)|number_format(2, '.') ~ ' <small>TB</small>' %}
+    {% endif %}
+    <span class="bytesToSize">{{text|raw}}</span>
+{% endspaceless %}
+{% endmacro %}
