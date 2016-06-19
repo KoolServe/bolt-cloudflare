@@ -15,11 +15,12 @@ class CloudflareExtension extends SimpleExtension
 {
     use Traits\FetchData;
 
-    /**
-     * The even name used in the log
-     * @var string
-     */
-    private $event = 'extension';
+    protected $config;
+
+    public function before()
+    {
+        $this->config = $this->getConfig();
+    }
 
     protected function registerAssets()
     {
@@ -54,8 +55,10 @@ class CloudflareExtension extends SimpleExtension
 
     protected function registerBackendControllers()
     {
+        $config = $this->getConfig();
+
         return [
-            '/' => new Controller\Backend(),
+            '/' => new Controller\Backend($config),
         ];
     }
 

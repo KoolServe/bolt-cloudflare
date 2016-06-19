@@ -12,15 +12,18 @@ trait FetchData {
     private $cacheKey = 'cloudflaredashboarddata';
 
     /**
+     * The event name used in the log
+     * @var string
+     */
+    private $event = 'extension';
+
+    /**
      * Create a new instance of Cloudflare\Cloudflare and use the guzzle client
      * that is built into bolt
      * @return Cloudflare\Cloudflare instance of Cloudflare\Cloudflare
      */
     protected function newCloudflare() {
-        $config = $this->getConfig();
-        $app = $this->getContainer();
-
-        return new Cloudflare\Cloudflare($config, $app['guzzle.client']);
+        return new Cloudflare\Cloudflare($this->config, $this->app['guzzle.client']);
     }
 
     /**
@@ -31,18 +34,16 @@ trait FetchData {
      */
     protected function fetchData()
     {
-        $config = $this->getConfig();
-        $app = $this->getContainer();
-        $cache = $app['cache'];
+        $cache = $this->app['cache'];
         $data = $cache->fetch($this->cacheKey);
 
         //Check to see if we have a cached version
         if ($data) {
             //We do so use it
-            return $data;
+            //return $data;
         }
 
-        $app['logger.system']->info(
+        $this->app['logger.system']->info(
             'Getting new data from clodflare',
             ['event' => $this->event]
         );
@@ -57,25 +58,22 @@ trait FetchData {
         foreach ($times as $time => $value) {
             $ZoneAnalytics = new Cloudflare\ZoneAnalytics($this->newCloudflare());
             $ZA = $ZoneAnalytics->fetchDashboard(
-                $config['ZoneID'],
+                $this->config['ZoneID'],
                 ['since' => $value]
             );
 
-            //dump($ZA->getResponse());
-
             if ($ZA != false) {
-                //dump($ZA->getResponse());
                 $data[$time] = $ZA->getResponse();
             }
         }
 
         //Store it in the cache for the next hour
         $cache->save($this->cacheKey, $data, 3600);
-        $app['logger.system']->info(
+        $this->app['logger.system']->info(
             'Saved the new data from clodflare for the next hour',
             ['event' => $this->event]
         );
 
-        return $this;
+        return $data;
     }
 }

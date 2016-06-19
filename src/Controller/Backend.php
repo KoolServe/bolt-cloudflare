@@ -8,10 +8,25 @@ use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Bolt\Extension\Koolserve\Cloudflare\Traits\FetchData;
 
 class Backend implements ControllerProviderInterface
 {
+    use FetchData;
+
     protected $app;
+
+    protected $config;
+
+    /**
+     * Constructor.
+     *
+     * @param config $config
+     */
+    public function __construct($config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * {@inheritdoc}
@@ -38,7 +53,17 @@ class Backend implements ControllerProviderInterface
      */
     public function index(Application $app)
     {
-        $html = $app['twig']->render('@CloudflareBackend/index.twig', []);
+        $data = [];
+        foreach ($this->fetchData() as $k => $v) {
+            $totals = $v->result->totals;
+            $data[$k] = [
+                'requests' => $totals->requests,
+                'bandwidth' => $totals->bandwidth,
+                'uniques' => $totals->uniques,
+            ];
+        }
+
+        $html = $app['twig']->render('@CloudflareBackend/index.twig', ['data' => $data]);
         return new Response(new \Twig_Markup($html, 'UTF-8'));
     }
 }
