@@ -15,10 +15,13 @@ class CloudflareExtension extends SimpleExtension
 {
     use Traits\FetchData;
 
+    protected $app;
+
     protected $config;
 
     public function before()
     {
+        $this->app = $this->getContainer();
         $this->config = $this->getConfig();
     }
 
@@ -77,8 +80,9 @@ class CloudflareExtension extends SimpleExtension
      */
     public function backendDashboardWidget()
     {
+        $app = $this->getContainer();
         $data = [];
-        foreach ($this->fetchData() as $k => $v) {
+        foreach ($this->fetchData($app) as $k => $v) {
             $data[$k] = $v->result->totals->requests->all;
         }
 

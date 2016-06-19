@@ -32,9 +32,13 @@ trait FetchData {
      *
      * @return array Website statistics for the last day, week and month
      */
-    protected function fetchData()
+    protected function fetchData($app = null)
     {
-        $cache = $this->app['cache'];
+        if($app === null) {
+            $app = $this->app;
+        }
+        
+        $cache = $app['cache'];
         $data = $cache->fetch($this->cacheKey);
 
         //Check to see if we have a cached version
