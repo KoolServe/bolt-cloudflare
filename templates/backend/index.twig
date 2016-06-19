@@ -14,10 +14,87 @@ Analytics
 {% block messages "" %}
 
 {% block page_main %}
-
     <div class="row cloudflare-koolserve-container">
         <div class="col-md-9">
-            <h1>Hello World</h1>
+            <div class="pull-right">
+                <span type="button" class="btn btn-default">Refresh</span>
+            </div>
+                <h1><strong>Analytics</strong> <small>View performance and security statistics for [domain]</small></h1>
+        </div>
+
+        <div class="col-md-9">
+            <h2>Requests <small>Requests Through CloudFlare</small></h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>9,999,999</h2>
+                        <h4>Total Requests</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>9,999,999</h2>
+                        <h4>Cached Requests</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>9,999,999</h2>
+                        <h4>Uncached Requests</h4>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="col-md-9">
+            <h2>Bandwidth</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>999 <small>MB</small></h2>
+                        <h4>Total Bandwidth</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>500 <small>MB</small></h2>
+                        <h4>Cached Bandwidth</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>499 <small>MB</small></h2>
+                        <h4>Uncached Bandwidth</h4>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="col-md-9">
+            <h2>Unique Visitors</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>1000</h2>
+                        <h4>Total Unique Visitors</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>500</h2>
+                        <h4>Maximum Unique Visitors</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-figure">
+                        <h2>0</h2>
+                        <h4>Minimum Unique Visitors</h4>
+                    </div>
+                </div>
+            </div>
+            <hr />
         </div>
     </div>
 
