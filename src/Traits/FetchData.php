@@ -23,7 +23,7 @@ trait FetchData {
      * @return Cloudflare\Cloudflare instance of Cloudflare\Cloudflare
      */
     protected function newCloudflare() {
-        return new Cloudflare\Cloudflare($this->config, $this->app['guzzle.client']);
+        return new Cloudflare\Cloudflare($this->config);
     }
 
     /**
@@ -32,22 +32,18 @@ trait FetchData {
      *
      * @return array Website statistics for the last day, week and month
      */
-    protected function fetchData($app = null)
+    protected function fetchData()
     {
-        if($app === null) {
-            $app = $this->app;
-        }
-
-        $cache = $app['cache'];
+        $cache = $this->app['cache'];
         $data = $cache->fetch($this->cacheKey);
 
         //Check to see if we have a cached version
         if ($data) {
             //We do so use it
-            return $data;
+            //return $data;
         }
 
-        $app['logger.system']->info(
+        $this->app['logger.system']->info(
             'Getting new data from clodflare',
             ['event' => $this->event]
         );
@@ -73,7 +69,7 @@ trait FetchData {
 
         //Store it in the cache for the next hour
         $cache->save($this->cacheKey, $data, 3600);
-        $app['logger.system']->info(
+        $this->app['logger.system']->info(
             'Saved the new data from clodflare for the next hour',
             ['event' => $this->event]
         );

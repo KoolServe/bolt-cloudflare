@@ -80,9 +80,11 @@ class CloudflareExtension extends SimpleExtension
      */
     public function backendDashboardWidget()
     {
-        $app = $this->getContainer();
+        $this->app = $this->getContainer();
+        $this->config = $this->getConfig();
+
         $data = [];
-        foreach ($this->fetchData($app) as $k => $v) {
+        foreach ($this->fetchData() as $k => $v) {
             $data[$k] = $v->result->totals->requests->all;
         }
 
