@@ -1,8 +1,24 @@
 <div class="panel panel-default panel-news">
-    <div class="panel-heading">Cloudflare</div>
-    <ul>
-        <li>Last 24 hours: {{ day }}</li>
-        <li>Last week: {{ week }}</li>
-        <li>Last month: {{ month }}</li>
-    </ul>
+    <div class="panel-heading">Cloudflare - Total requests</div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>
+                    <h3 class="text-center">{{ day }}</h3>
+                    <h5 class="text-center">Last 24 hours</h5>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    <h3 class="text-center">{{ week }}</h3>
+                    <h5 class="text-center">Last week</h5>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    <h3 class="text-center">{{ month }}</h3>
+                    <h5 class="text-center">Last month</h5>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

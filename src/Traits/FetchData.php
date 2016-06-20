@@ -40,7 +40,7 @@ trait FetchData {
         //Check to see if we have a cached version
         if ($data) {
             //We do so use it
-            //return $data;
+            return $data;
         }
 
         $this->app['logger.system']->info(
