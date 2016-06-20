@@ -37,7 +37,7 @@ trait FetchData {
         if($app === null) {
             $app = $this->app;
         }
-        
+
         $cache = $app['cache'];
         $data = $cache->fetch($this->cacheKey);
 
@@ -47,7 +47,7 @@ trait FetchData {
             return $data;
         }
 
-        $this->app['logger.system']->info(
+        $app['logger.system']->info(
             'Getting new data from clodflare',
             ['event' => $this->event]
         );
@@ -73,7 +73,7 @@ trait FetchData {
 
         //Store it in the cache for the next hour
         $cache->save($this->cacheKey, $data, 3600);
-        $this->app['logger.system']->info(
+        $app['logger.system']->info(
             'Saved the new data from clodflare for the next hour',
             ['event' => $this->event]
         );
