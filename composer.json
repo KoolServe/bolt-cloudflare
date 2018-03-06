@@ -2,14 +2,12 @@
     "name": "koolserve/cloudflare",
     "description": "A bolt extension to show analytics from Cloudflare about your website.",
     "type": "bolt-extension",
+    "version": "0.3.2",
     "keywords": [
         "Cloudflare"
     ],
     "require": {
-        "bolt/bolt": "^3.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^4.7"
+        "bolt/bolt": ">=3 <3.3"
     },
     "license": "GPL-3.0",
     "authors": [
@@ -24,12 +22,6 @@
         "psr-4": {
             "Bolt\\Extension\\Koolserve\\Cloudflare\\": "src",
             "Cloudflare\\": "lib/alpharecon19/cloudflare-php/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Bolt\\Extension\\Koolserve\\Cloudflare\\Tests\\": "tests",
-            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
